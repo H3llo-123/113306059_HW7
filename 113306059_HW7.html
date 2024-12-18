@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="113306059_HW7.css">
+  <title>Profile Page</title>
+</head>
+<body>
+  <div class="main-container">
+    <div class="left-panel">
+      <div class="photo-panel">
+        <img src="122794.jpg" alt="NCCU Icon" class="nccu-icon">
+      </div>
+      <div class="text-content">
+        <div style="display: flex; align-items: center;">
+          <h1 id="name" style="margin-right: 10px;">YAYAYA</h1>
+          <button id="edit-btn">edit</button>
+        </div>
+        <section class="about-me">
+          <h2>About Me</h2>
+          <p>I am a freshman in the Department of Management Information Systems at National ChengChi University. I am very interested in studying programming and computer science fundamentals. I have experience in writing Java, HTML, CSS, JavaScript, and Python.</p>
+        </section>
+        <section class="contact-info">
+          <h2>Contact Info</h2>
+          <p>Email: 113306059@g.nuuc.edu.tw<br>Phone: (02) 222-2222<br>
+            <img src="NCCU icon.png" alt="NCCU Icon" class="nccu-icon"></p>
+        </section>
+      </div>
+    </div>
+    <!-- Right Panel -->
+    <div class="right-panel">
+      <section class="education">
+        <h2>Education</h2>
+        <div class="timeline">
+          <div class="entry">
+            <span class="year">2028</span>
+            <span class="description">Graduated from NCCU with a degree in Management Information Systems.</span>
+          </div>
+          <div class="entry">
+            <span class="year">2024</span>
+            <span class="description">Started at NCCU as a freshman.</span>
+          </div>
+        </div>
+      </section>
+      <section class="homework-list">
+        <h2>Homework List</h2>
+        <ul>
+          <li><a href="https://github.com/H3llo-123/HW1.git">HW1</a></li>
+          <li><a href="https://github.com/H3llo-123/HW2.git">HW2</a></li>
+          <li><a href="https://github.com/H3llo-123/HW3.git">HW3</a></li>
+        </ul>
+      </section>
+      <section class="favorite-music">
+        <h2>Favorite Music</h2>
+        <div class="album-covers" id="music-list">
+          <a href="https://reurl.cc/jQ5qom" target="_blank"><img src="superache.webp" alt="superache"><br>superache</a>
+          <a href="https://reurl.cc/Y46WbX" target="_blank"><img src="Kid Krow.jpg" alt="Kid Krow"><br>kid krow</a>
+          <a href="https://reurl.cc/WALEoe" target="_blank"><img src="sunset season.jpg" alt="sunset season"><br>sunset season</a>
+          <a href="https://reurl.cc/oVd9bM" target="_blank"><img src="Found Heaven.jpg" alt="Found Heaven"><br>found heaven</a>
+        </div>
+        <button id="add-music-btn">add</button>
+        <div id="music-form-container" style="display: none;">
+          <form id="music-form">
+            <label for="music-link">Music Link:</label>
+            <input type="url" id="music-link" required><br>
+            <label for="music-name">Music Name:</label>
+            <input type="text" id="music-name" required><br>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+        <p class="note">These songs are my favorites because I like them!!!</p>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    let isEditing = false;
+    const nameElement = document.getElementById('name');
+    const editBtn = document.getElementById('edit-btn');
+    
+    editBtn.addEventListener('click', () => {
+      if (!isEditing) {
+        const currentName = nameElement.textContent;
+        nameElement.innerHTML = `<input type='text' id='name-input' value='${currentName}' />`;
+        editBtn.textContent = 'save';
+      } else {
+        const nameInput = document.getElementById('name-input');
+        nameElement.textContent = nameInput.value;
+        editBtn.textContent = 'edit';
+      }
+      isEditing = !isEditing;
+    });
+
+    const addMusicBtn = document.getElementById('add-music-btn');
+    const musicFormContainer = document.getElementById('music-form-container');
+    const musicForm = document.getElementById('music-form');
+    const musicList = document.getElementById('music-list');
+
+    addMusicBtn.addEventListener('click', () => {
+      musicFormContainer.style.display = 'block';
+    });
+
+    musicForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const musicLink = document.getElementById('music-link').value;
+      const musicName = document.getElementById('music-name').value;
+
+      if (musicLink && musicName) {
+        const musicItem = document.createElement('a');
+        musicItem.href = musicLink;
+        musicItem.target = '_blank';
+        musicItem.innerHTML = `<img src='YT icon.png' alt='${musicName}' /> ${musicName}`;
+        musicList.appendChild(musicItem);
+
+        musicForm.reset();
+        musicFormContainer.style.display = 'none';
+      } else {
+        alert('Please fill out all fields before submitting!');
+      }
+    });
+  </script>
+</body>
+</html>
